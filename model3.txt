@@ -1,0 +1,19 @@
+
+model {
+for(i in 1:N){ 
+
+      for(j in 1:n){ 
+       w[i,j]~ dnorm(0, 1) I(0,)
+       mu[i,j]<- beta[1]+x[(5*(i-1)+j)]*beta[2]+t[(5*(i-1)+j)]*beta[3]+deltae*w[i,j] #last part is for skeweness of error term
+       y[(5*(i-1)+j)]~ dnorm(mu[i ,j],tau)
+      }
+    }   
+ for(p in 1:3){ 
+    beta[p]~dnorm(0,0.01)
+    }
+  tau ~dgamma(0.01,0.01)
+ deltae ~dnorm(0,0.01)I(0,) 
+var_b<-0
+var_e<-pow(tau,-1)
+ 
+    }
