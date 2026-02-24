@@ -1,0 +1,30 @@
+model 
+  {
+  #Likelihood
+  for (k in 1:K)
+  {
+  mu[k] <-  beta[1]+beta[2]*sex[k]+beta[3]*age[k]+beta[4]*age[k]*sex[k]+b[id[k]]
+  y[k] ~ dnorm( mu[k], tau_e )
+  }
+  
+  #Random effects for each subject 
+  for( j in 1:n){
+  b[j] ~ dnorm(0,tau_b)
+  }
+  
+  #------------------------------------------------------------
+  # Priors: 
+  #Prior on regression effects
+  for(p in 1:4){
+  beta[p]~dnorm(0,1.0E-06)
+  }
+  
+  #Prior on residual precision
+  sigma_e<-pow(var_e,0.5)
+  var_e<-pow(tau_e,-1)
+  tau_e~dgamma(0.001,0.001) 
+  
+  # Prior on random effect precision
+  sigma_b ~ dunif(0, 100)
+  var_b<-pow(sigma_b,2)
+  tau_b<-pow(sigma_b,-2)}

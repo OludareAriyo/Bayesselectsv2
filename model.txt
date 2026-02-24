@@ -1,0 +1,31 @@
+model
+{
+for(i in 1:N){ #i is for subject
+    #Random effect intercept
+   
+    for(o in 1:2){  #loop for each random effect
+       wb[i,o] ~dnorm(0, 1)I(0,)
+       a[i,o]<-deltab[o]*wb[i,o] #skew distribution
+    }
+    b[i,1:2] ~ dmnorm(a[i,1:2],tau_b)
+}
+for(k in 1:K){   # loop for observation
+       w[k]~dnorm(0,1)I(0,)
+       mu[k]<- beta[1]+beta[2]*x[k]+beta[3]*t[k]+b[id[k],1]*t[k]+b[id[k],2]+deltae*w[k]   #last part is for skeweness of error term
+       y[k] ~ dnorm(mu[k], tau )
+  
+}
+tau_b[1:2,1:2] ~dwish(R[,],2)
+ for(p in 1:3){ 
+    beta[p]~dnorm(0,0.01)
+    }
+ tau ~dgamma(0.01,0.01)
+ deltab[1]~dnorm(0,0.01)I(0,)
+ deltab[2] ~dnorm(0,0.01)I(0,)
+ deltae ~dnorm(0,0.01)I(0,) 
+ var_e<-pow(tau,-1)
+ sigma_e<-pow(var_e,0.5)
+  
+ sigma_b<-inverse(tau_b[,])
+
+    }
