@@ -1,5 +1,5 @@
 ## Bayesselectsv2
-This function computes conditional and marginalised DIC, WAIC and PSBF for model selection in linear mixed models with skew-normal random effects and measurement error for longitudinal data.
+This function (v2) computes conditional and marginalised DIC, WAIC and PSBF for model selection in linear mixed models with skew-normal random effects and measurement error for longitudinal data.
 
 References:
 
