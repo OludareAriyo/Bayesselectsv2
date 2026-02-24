@@ -3,9 +3,9 @@
 library("mvtnorm")
 library("rjags")
 
-setwd("I:\My work\Research materials\leuvenPhD\Paper2\proposal\ModelCopare\JAStemplate\JAS new\Simulation_Study\Skew-normal code\JAS_fuctions")
+setwd("JAS_fuctions")
 
-##Call function that calculates the criteria
+##Call the function that calculates the criteria
 source("func_bayesselect.R")
 
 ###
